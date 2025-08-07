@@ -1,14 +1,42 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
+import examenUno from '../assets/examen1.png';
+import examenDos from '../assets/examen2.png';
 
 const dummyProjects = {
   react: [
-    { title: 'Contador', description: 'Contador con useState', points: 15 },
-    { title: 'Todo App', description: 'Lista de tareas con hooks', points: 25 },
+    {
+      title: 'Contador',
+      description: 'Contador con useState',
+      points: 15,
+      img: '',
+      link: 'https://github.com/tuusuario/contador-react',
+    },
+    {
+      title: 'Todo App',
+      description: 'Lista de tareas con hooks',
+      points: 25,
+      img: '',
+      link: 'https://github.com/tuusuario/todo-react',
+    },
   ],
   firebase: [
-    { title: 'Auth', description: 'Login con Firebase', points: 20 },
+    {
+      title: 'NavBar SPA',
+      description: 'Login con Firebase y validaciones de sesión.',
+      points: 20,
+      img: examenUno,
+      link: 'https://examenjf.netlify.app/',
+    },
+        {
+      title: 'Gestor de tareas',
+      description: 'App CRUD para administracion de tareas haciendo uso de fichas',
+      points: 50,
+      img: examenDos,
+      link: 'https://gestor-tareas-jf.netlify.app/',
+    },
   ],
 };
 
@@ -46,7 +74,30 @@ const handlePlay = (project) => {
   }, 300);
 };
 
+
   const projects = dummyProjects[tech] || [];
+  const [animatedDescription, setAnimatedDescription] = useState('');
+
+    useEffect(() => {
+      if (selectedProject) {
+        let index = 0;
+        setAnimatedDescription(''); // reiniciar
+
+        const interval = setInterval(() => {
+          setAnimatedDescription((prev) =>
+            selectedProject.description.slice(0, index + 1)
+          );
+          index++;
+          if (index >= selectedProject.description.length) {
+            clearInterval(interval);
+          }
+        }, 30); // velocidad en ms
+
+        return () => clearInterval(interval);
+      } else {
+        setAnimatedDescription('');
+      }
+    }, [selectedProject]);
 
   return (
     <div className="p-4 flex flex-col items-center font-['VT323']">
@@ -66,6 +117,35 @@ const handlePlay = (project) => {
           />
         ))}
       </div>
+
+{selectedProject && (
+  <div className="bg-white border-2 border-black rounded-lg p-4 max-w-sm mb-4 shadow-lg font-mono text-sm text-black animate-fade-in">
+    <h3 className="text-lg font-bold mb-2 uppercase">{selectedProject.title}</h3>
+
+    {selectedProject.img && (
+      <img
+        src={selectedProject.img}
+        alt={selectedProject.title}
+        className="w-full h-32 object-cover border border-black mb-2"
+      />
+    )}
+
+    <p className="mb-1 whitespace-pre-wrap">{animatedDescription}</p>
+
+    {selectedProject.link && (
+      <a
+        href={selectedProject.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-blue-600 underline hover:text-blue-800 transition-colors block mt-2"
+      >
+        Abrir.
+      </a>
+    )}
+
+    <p className="text-green-600 mt-2">+{selectedProject.points} puntos de interés</p>
+  </div>
+)}
 
       {/* Botón rojo retro */}
         <div className="relative h-12 mt-4 flex justify-center items-center">
