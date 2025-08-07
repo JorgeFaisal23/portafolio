@@ -4,22 +4,17 @@ import { useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import examenUno from '../assets/examen1.png';
 import examenDos from '../assets/examen2.png';
+import tripticoReact from '../assets/triptico.png';
+import mPal from '../assets/marketPal.png';
 
 const dummyProjects = {
   react: [
     {
-      title: 'Contador',
+      title: 'Triptico',
       description: 'Contador con useState',
       points: 15,
-      img: '',
-      link: 'https://github.com/tuusuario/contador-react',
-    },
-    {
-      title: 'Todo App',
-      description: 'Lista de tareas con hooks',
-      points: 25,
-      img: '',
-      link: 'https://github.com/tuusuario/todo-react',
+      img: tripticoReact,
+      link: 'https://github.com/JorgeFaisal23/Triptico/tree/main/triptico-jafs',
     },
   ],
   firebase: [
@@ -32,10 +27,19 @@ const dummyProjects = {
     },
         {
       title: 'Gestor de tareas',
-      description: 'App CRUD para administracion de tareas haciendo uso de fichas',
+      description: 'App CRUD para administracion de tareas haciendo uso de fichas.',
       points: 50,
       img: examenDos,
       link: 'https://gestor-tareas-jf.netlify.app/',
+    },
+  ],
+    csharp: [
+    {
+      title: 'MarketPal',
+      description: 'Programa de Punto de Venta, altamente personalizable e intuitivo para empresarios locales',
+      points: 100,
+      img: mPal,
+      link: 'https://github.com/MikeGPQ/MarketPal-1.2.git',
     },
   ],
 };
@@ -84,7 +88,7 @@ const handlePlay = (project) => {
         setAnimatedDescription(''); // reiniciar
 
         const interval = setInterval(() => {
-          setAnimatedDescription((prev) =>
+          setAnimatedDescription(() =>
             selectedProject.description.slice(0, index + 1)
           );
           index++;
