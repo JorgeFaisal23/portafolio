@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import reactJoker from '../assets/jokers/react-joker.png';
-import firebaseJoker from '../assets/jokers/firebase-joker.png';
-import csharpJoker from '../assets/jokers/csharp-joker.png';
-import tailwindJoker from '../assets/jokers/tailwind-joker.png';
-import skillsJoker from '../assets/jokers/skills-joker.png';
-import devlogsJoker from '../assets/jokers/devlogs-joker.png';
+import reactJoker from '../assets/Jokers/react-joker.png';
+import firebaseJoker from '../assets/Jokers/firebase-joker.png';
+import csharpJoker from '../assets/Jokers/csharp-joker.png';
+import tailwindJoker from '../assets/Jokers/tailwind-joker.png';
+import skillsJoker from '../assets/Jokers/skills-joker.png';
+import devlogsJoker from '../assets/Jokers/devlogs-joker.png';
 
 const jokers = [
   { tech: 'react', img: reactJoker },
